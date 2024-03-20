@@ -8,5 +8,10 @@ namespace BookStoreWebApp.Controllers
         {
             return View();
         }
+
+        public ViewResult About()
+        {
+            return View();
+        }
     }
 }
