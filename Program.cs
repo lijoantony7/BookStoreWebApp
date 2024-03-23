@@ -19,6 +19,9 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+//static folder name wwwroot should be root level folder
+app.UseStaticFiles();
+
 app.UseEndpoints(endpoints =>
 {
    endpoints.MapDefaultControllerRoute();

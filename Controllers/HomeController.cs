@@ -9,7 +9,11 @@ namespace BookStoreWebApp.Controllers
             return View();
         }
 
-        public ViewResult About() {
+        public ViewResult About() 
+        {
+            //View Discovery takes places to find the view
+            //View Discovery ditermine which file to be opened.
+            //will search for the VIEW in view->particular folder and view->shared folder.
             return View();
         }
     }
