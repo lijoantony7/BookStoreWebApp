@@ -1,0 +1,19 @@
+﻿
+Razor compilition takes place only two time
+	-> Build
+	-> Publish
+
+It creates a probles while developing.
+	-> It will run the razor when running the app so while changing the file in view page it won't affect the webpage on real time.
+
+To resolve this problem, need to ENABLE RUN TIME COMPILITION
+	-> Install new package from "microsft.aspdotnet.mvc.razor.runtimecompilition"
+
+1. Install via NuGet Package
+2. Add this service into (configure seervice) in program.cs file
+3. make sure its compile only on develepment environement.
+		#if DEBUG
+			builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+		#endif
+
+		It will compile only on development env.
