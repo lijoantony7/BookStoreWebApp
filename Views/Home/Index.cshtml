@@ -1,10 +1,17 @@
-﻿
+﻿@* VIEW ENGINE(peice of code): render the cshtml code to pure HTML file to be shown in the browser
+    -> workd with view
+    -> used to set/get default path for view, shared
+*@
+@* Razor is a view Engine
+    Razor engine used to write c# login in view
+*@
+
+
 @{
     Layout = null;
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -14,5 +21,6 @@
     <h1>
         Wecome to the Application.
     </h1>
+    <p>@DateTime.Now</p>
 </body>
 </html>
