@@ -1,7 +1,11 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews(); // dependacy injections services
+builder.Services.AddControllersWithViews(); // dependency injections services
+
+#if DEBUG
+    builder.Services.AddRazorPages().AddRazorRuntimeCompilation(); // runtime Compilation enabled
+#endif
 
 var app = builder.Build(); // in app. http pipeline
 
