@@ -1,0 +1,30 @@
+﻿
+RENDERSECTION and SECTION
+
+-> To run the js code for the specific page we can write it in the html page directly or spearte page.
+	-> Problem is, js or script tag define at the bottom of the file, it executes at the last only. 
+		JS can not be reacted once the rendering happens.
+		In html the script is defined but rendringBody will get this js for the page. So the page with script will come inside the
+		bodyRender() (inside the main tag) which will trigger an error.
+
+		Avoiding this we can use rendersection()
+
+SOLUTION
+--------
+
+RenderSection
+	-> RenderSection is a space with a specific name and it is used on _Layout file.
+	-> tells application that some other code (coming from view) will be placed here.
+
+	@Section using in view.
+	-> The section code will be replaced with RenderSection in layout file.
+
+
+
+	This is solution layer.
+	HEADER
+	CSS
+	BODY
+	JS
+	RENDERSECTION
+	FOOTER

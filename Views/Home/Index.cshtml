@@ -11,6 +11,14 @@
     Layout = "_Layout";
 }
 
+@section breadcrumb{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Page1</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Page2</li>
+    </ol>
+}
+
 <section class="text-center p-4 mb-4">
     <div class="container">
         <h1>Welcome to Book Store</h1>
@@ -76,3 +84,11 @@
         </div>
     </div>
 </div>
+
+@section scripts{
+    <script>
+        $(document).ready(function(){
+
+        })
+    </script>
+}

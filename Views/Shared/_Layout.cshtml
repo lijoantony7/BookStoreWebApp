@@ -21,7 +21,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/">Home</a>
+                            <a class="nav-link active" href="/">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/Home/About">About</a>
@@ -40,13 +40,23 @@
             </div>
         </nav>
     </header>
+
+    @RenderSection("breadcrumb", required:false)
+
     <main role="main">
         @RenderBody()
     </main>
+
     <footer class="border-top footer text-muted text-center py-3">
         <div class="container">
-            <p class="mt-2 mb-0">&copy; 2024 Book Store. All rights reserved.</p>
+            <p class="mb-0">&copy; 2024 Book Store. All rights reserved.</p>
         </div>
     </footer>
+
+    <script src="~/lib/jquery/jquery.js"></script>
+
+    <!-- To avoid script not found issue in pages. Check documentation page. -->
+    <!-- required:false, it's not mandatory to have script files in every page. -->
+    @RenderSection("scripts", required: false)
 </body>
 </html>
