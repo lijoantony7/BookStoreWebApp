@@ -1,0 +1,22 @@
+﻿
+VIEWSTART
+---------	
+
+problem, consider created 150 views in app, suddenly have to change the layout page name to new name. This time we have to change in all
+		150 pages. Its not good and code repetation happens.
+
+
+solution, create a common ViewStart view in root level becoause its common for all view pages.
+
+
+working, When the app start to execute the ViewStart file execute first before other view file execute.
+		-> Whatever layout is used in this page will be used in the opening view page.
+		-> So code repetation (defining layout in every view page) can be removed.
+
+Other Use
+---------
+-> If we want ot overright the layout of a particular view page, we can use Layout in that view file.
+	-> This time the layout in the view file will be overright.
+
+-> If we want some other layout for particular files (for a heirachy structure) we can create a new ViewStart file in that
+	particular heirachy only.
