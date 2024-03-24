@@ -19,10 +19,12 @@ namespace BookStoreWebApp.Controllers
             return View(result);
         }
 
-        public BookViewModel Book(int id)
+        public ViewResult BookDetails(int id)
         {
-            return _bookRepository.GetById(id);
+            var result = _bookRepository.GetById(id);
+            return View(result);
         }
+
         public BookViewModel BookDetail(string author)
         {
             return _bookRepository.GetByName(author);
