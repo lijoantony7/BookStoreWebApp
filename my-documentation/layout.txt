@@ -1,0 +1,7 @@
+﻿
+LAYOUT
+-> Its a cshtml file to provide common structure to other views.
+-> Avoid code repetation
+
+@RenderBody() is used to allow other view to get space in the layout.
+	-> only one renderbody method can be in one layout
