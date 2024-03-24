@@ -1,0 +1,11 @@
+﻿
+VIEW IMPORT.CSHTML
+------------------
+
+
+problem, consider created 150 views in app, suddenly have to change the @using directory in the page.
+	-> here code repetation is happening, right? YES, @using directory is in all view files.
+
+solution, create a common _ViewImport file in root level becoause its common for all view pages.
+
+scope, its applicable for root level and sub folder level.
