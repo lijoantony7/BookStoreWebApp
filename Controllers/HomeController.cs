@@ -4,9 +4,12 @@ namespace BookStoreWebApp.Controllers
 {
     public class HomeController : Controller
     {
+        [ViewData]
+        public string? Title {  get; set; }
         public ViewResult Index()
         {
-            ViewData["Title"] = "Welcome Page";
+            //ViewData["Title"] = "Welcome Page";
+            Title = "New Home";  // passing title using viewdata attribute
             return View();
         }
 

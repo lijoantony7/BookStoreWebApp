@@ -1,0 +1,33 @@
+﻿
+VIEW DATA ATTRIBUTE
+-------------------
+
+public ViewResult Index()
+{
+    ViewData["Title"] = "Welcome Page";      -> Any type of value
+    return View();
+}
+
+
+       ||
+       \/
+
+
+[ViewData]
+public string Title {get; set;}
+public ViewResult Index()                   -> specific type of value using ViewData attribute
+{
+    Title = "Welcome Page";
+    return View();
+}
+
+Advantage
+---------
+Title passing in the particular view is now code repetation happening, using Title property in all the view page.
+This can be removed by using attribute. Like above,
+And in view page this can be removed.
+@{
+    ViewData["Title"] = "Home";
+}
+
+for overriding the title, can use this code in the view page.
