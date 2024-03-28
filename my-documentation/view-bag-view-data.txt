@@ -1,0 +1,43 @@
+﻿
+VIEW BAG
+--------
+
+View Bag is used to pass the data from action method to view page which is visible on the view.	
+This type of data binding is called LOOSELY BINDING.
+We can pass any type of data in it. (variables, string, objects....)
+It is dynamic property.
+
+How
+---
+
+ViewBag.PropertyName = Data; (in controller side)
+@ViewBag.PropertyName (in view side)
+
+-> One view can have more viewBag.
+-> ViewBag can be used with or without model.
+-> Scope of ViewBag is view().
+->No compile time error so sometimes error can be occured.
+
+VIEW DATA
+---------
+
+Can pass data from controller to view.
+Loosily binding.
+WOKRKING KEY VALUE PAIR
+viewData use ViewDisctionary
+Any data can be pass.
+
+->ViewData can send data from view to its Layout✔️
+	-> Layout Tiltle can dynamic
+
+How
+---
+View['propertyName'] = data; in controller
+@viewData['propertyName']; in view
+
+ViewData["data"] = new BookViewModel(){.....}; in controller
+@{
+	var bookData = ViewData["data"] as BookViewModel; in View page
+}
+using that data
+@bookData.Id;

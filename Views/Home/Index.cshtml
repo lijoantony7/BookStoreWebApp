@@ -1,4 +1,8 @@
 ﻿
+@{
+    ViewData["Title"] = "Home";
+}
+
 @section breadcrumb{
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -9,7 +13,7 @@
 
 <section class="text-center p-4 mb-4">
     <div class="container">
-        <h1>Welcome to Book Store</h1>
+        <h1>Welcome to Book Store @ViewData["Title"]</h1>
         <p class="lead text-muted">This is the demo description in the store. Here you can see the library.</p>
         <p>
             <a class="btn btn-primary" href="#">Search Books</a>

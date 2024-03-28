@@ -6,6 +6,7 @@ namespace BookStoreWebApp.Controllers
     {
         public ViewResult Index()
         {
+            ViewData["Title"] = "Welcome Page";
             return View();
         }
 
