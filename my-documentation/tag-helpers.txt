@@ -1,0 +1,15 @@
+﻿
+TAG HELPERS
+-----------
+
+To render server side code on razor(cshtml) page and create html elements.
+	eg: create form elements, img elements,...
+
+We can use tags in single page by adding in the view page or can be used in enitre app by adding in _ViewImport page.
+	@addTagHelper *, Microsoft.ASPDotNetCore.MVC.TagHelpers
+
+in html page we can add these tags:
+	asp-controller
+	asp-action
+	asp-for
+	.....
