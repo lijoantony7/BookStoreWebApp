@@ -1,0 +1,34 @@
+﻿
+ENTITY FREAMEWORK
+-----------------
+
+EF Core is MS official technology to interact with RELATIONAL DATABASE can be anything mysql, sql, cosmose db,....
+
+-> Works on OMR(object relational model)
+-> Open source
+-> Lightweight
+-> Extensible
+-> Support Async
+
+OMR
+---
+-> a tool used to manage database data from an object-oriented perspective.
+	-> Classes as TABLE
+	-> Properties as TABLE COLUNMS
+
+-> To generate datatables two ways
+	CODE FIRST APPROACH				- Our choice
+	DATABASE FIRST APPROACH
+
+Working
+-------
+EF Core works with MODEL CLASSES
+	A model is made up of ENTITY CLASS AND A CONTEXT OBJECT
+
+
+Setup for SQL Server
+--------------------
+-> Microsoft.EntityFrameworkCore (global package for ef core)
+-> Microsoft.EntityFrameworkCore.Relational
+-> Microsoft.EntityFrameworkCore.SqlServer
+-> Microsoft.EntityFrameworkCore.Tools
