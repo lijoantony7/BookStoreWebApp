@@ -3,6 +3,8 @@ using BookStoreWebApp.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+// Access IWebHostEnvironment
+var environment = builder.Environment;
 
 // Add services to the container.
 builder.Services.AddControllersWithViews(); // dependency injections services

@@ -29,6 +29,10 @@ namespace BookStoreWebApp.ViewModels
         [StringLength( 50, ErrorMessage = "Language name cannot be longer than 50 characters." )]
         public string Language { get; set; }
 
+        [Display(Name = "Upload the cover photo")]
+        [Required]
+        public IFormFile CoverPhoto { get; set; }
+
         public DateTime? CreatedBy { get; set; }
         public DateTime? UpdatedBy { get; set; }
     }
