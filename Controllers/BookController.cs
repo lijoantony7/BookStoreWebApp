@@ -35,13 +35,17 @@ namespace BookStoreWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> AddBook (BookViewModel bookViewModel)
         {
-            int id = await _bookRepository.AddNewBook( bookViewModel );
-            if( id > 0 )
+            if ( ModelState.IsValid )
             {
-                // IActionResult can return any type of data.
-                //return RedirectToAction( "AddBook" );
-                return RedirectToAction( nameof(AddBook), new {isSuccess = true, bookId = id} );
+                int id = await _bookRepository.AddNewBook( bookViewModel );
+                if ( id > 0 )
+                {
+                    // IActionResult can return any type of data.
+                    //return RedirectToAction( "AddBook" );
+                    return RedirectToAction( nameof( AddBook ), new { isSuccess = true, bookId = id } );
+                }
             }
+            
             return View();
         }
 

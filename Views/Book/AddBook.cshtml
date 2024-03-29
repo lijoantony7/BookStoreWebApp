@@ -7,7 +7,7 @@
 <div class="container">
     <h3 class="display-4">Add New Book</h3>
     <hr />
-    @if ( ViewBag.isSuccess )
+    @if ( ViewBag.isSuccess == true)
     {
         <div class="alert alert-success alert-dismissible fade show d-flex justify-content-between" role="alert">
             <div>
@@ -23,26 +23,32 @@
         <div class="form-group">
             <label asp-for="Title"></label>
             <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="Category"></label>
             <input asp-for="Category" class="form-control" />
+            <span asp-validation-for="Category" class="text-danger"></span>
         </div>
         <div>
             <label asp-for="Author"></label>
             <input asp-for="Author" class="form-control" />
+            <span asp-validation-for="Author" class="text-danger"></span>
         </div>
         <div>
             <label asp-for="Language"></label>
             <input asp-for="Language" class="form-control" />
+            <span asp-validation-for="Language" class="text-danger"></span>
         </div>
         <div>
             <label asp-for="TotalPages"></label>
             <input asp-for="TotalPages" class="form-control" />
+            <span asp-validation-for="TotalPages" class="text-danger"></span>
         </div>
         <div>
             <label asp-for="Description"></label>
             <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
         </div>
         <div>
             <input type="submit" value="Add Book" class="btn btn-primary" />

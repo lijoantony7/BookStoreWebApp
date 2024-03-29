@@ -1,0 +1,27 @@
+﻿
+VALIDATIONS
+-----------
+
+Server side validation can be done by adding TagAttributes in model class:
+	[Required( ErrorMessage = "Title is required." )]
+        [StringLength( 100, ErrorMessage = "Title cannot be longer than 100 characters." )]
+        public string Title { get; set; }
+
+    -> Each time of form submiting the controller will hit and the server side validation do happen.
+    -> This is NOT GOOD for client, cos each time its hittng controller affect the process.
+
+Client side validation
+----------------------
+
+Instead of hitting at controller every time client side validation is better with server side validation.
+    -> jquery.validation.js
+    -> jquery.validation.unobtrusive.js
+    can be used for that.
+
+    -> add this client side libraries and add them in the layout page by order after .js
+
+    For desabling client side validation, but not reccomented. For Developing purpose it can be used.
+    builder.Services.AddRazorPages().AddRazorRuntimeCompilation().AddViewOptions( options =>
+    {
+        options.HtmlHelperOptions.ClientValidationEnabled = false;
+    } );
