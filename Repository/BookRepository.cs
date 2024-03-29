@@ -1,25 +1,52 @@
-﻿using BookStoreWebApp.ViewModels;
+﻿using BookStoreWebApp.BookStoreContext;
+using BookStoreWebApp.ViewModels;
 
 namespace BookStoreWebApp.Repository
 {
     public class BookRepository
     {
-        public List<BookViewModel> GetAllBooks()
+        private readonly AppDbContext _context;
+        public BookRepository ( AppDbContext context )
+        {
+            _context = context;
+        }
+
+        public int AddNewBook ( BookViewModel book )
+        {
+            var newBook = new Books()
+            {
+                Title = book.Title,
+                Author = book.Author,
+                Language = book.Language,
+                Description = book.Description,
+                TotalPages = book.TotalPages,
+                Category = book.Category,
+                CreatedBy = DateTime.UtcNow,
+                UpdatedBy = DateTime.UtcNow,
+            };
+
+            _context.Books.Add( newBook );
+            _context.SaveChanges();
+
+            return newBook.Id;
+        }
+
+        public List<BookViewModel> GetAllBooks ()
         {
             return DataSource();
         }
 
-        public BookViewModel GetById(int id)
+        public BookViewModel GetById ( int id )
         {
-            return DataSource().FirstOrDefault(b => b.Id == id);
+            return DataSource().FirstOrDefault( b => b.Id == id );
         }
 
-        public BookViewModel GetByName(string author)
+        public BookViewModel GetByName ( string author )
         {
-            return DataSource().FirstOrDefault(b => b.Author == author);
+            return DataSource().FirstOrDefault( b => b.Author == author );
         }
 
-        private List<BookViewModel> DataSource()
+        private List<BookViewModel> DataSource ()
         {
             return new List<BookViewModel>()
             {

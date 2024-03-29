@@ -1,0 +1,37 @@
+﻿
+Data adding in DB
+-----------------
+
+-> Create the DbContext instance in the class where we are gonna add the code for new Book (repository or in entity class).
+	private readonly AppDbContext _dbContext;
+
+	add this in the constructor of the current class.
+
+	in creation method
+		var newBook = new Book(){
+			properties
+			.
+			.
+
+		}
+
+		_dbContext.Add(newBook);
+		_dbContext.SaveChanges(); This line only hit the DB for adding data. (IMP*)
+
+	In controller
+		add appropiate method to call the above method and pass the data in it.
+
+		In the controller
+			public BookController ()
+			{
+				_bookRepository = new BookRepository;
+			}
+
+		we can't use like this. DI rule is should not create new object with new keyword.
+		So handle this is program.cs by using service.addscoped<repo, repo>();
+
+		and in controller like this
+		public BookController (BookRepository bookRepository)
+        {
+            _bookRepository = bookRepository;
+        }

@@ -1,4 +1,5 @@
 using BookStoreWebApp.BookStoreContext;
+using BookStoreWebApp.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,8 @@ builder.Services.AddDbContext<AppDbContext>( options =>
 #if DEBUG
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation(); // runtime Compilation enabled
 #endif
+
+builder.Services.AddScoped<BookRepository, BookRepository>();
 
 var app = builder.Build(); // in app. http pipeline
 

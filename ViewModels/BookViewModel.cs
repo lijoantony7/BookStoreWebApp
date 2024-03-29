@@ -9,5 +9,7 @@
         public string Category { get; set; }
         public int TotalPages { get; set; }
         public string Language { get; set; }
+        public DateTime? CreatedBy { get; set; }
+        public DateTime? UpdatedBy { get; set; }
     }
 }

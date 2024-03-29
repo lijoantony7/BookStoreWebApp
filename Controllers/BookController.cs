@@ -8,9 +8,9 @@ namespace BookStoreWebApp.Controllers
     {
         private readonly BookRepository _bookRepository;
 
-        public BookController ()
+        public BookController (BookRepository bookRepository)
         {
-            _bookRepository = new BookRepository();
+            _bookRepository = bookRepository;
         }
 
         public ViewResult AllBooks ()
@@ -25,14 +25,23 @@ namespace BookStoreWebApp.Controllers
             return View( result );
         }
 
-        public ViewResult AddBook ()
+        public ViewResult AddBook (bool isSuccess = false, int bookId = 0)
         {
+            ViewBag.IsSuccess = isSuccess;
+            ViewBag.BookId = bookId;
             return View();
         }
 
         [HttpPost]
-        public ViewResult AddBook (BookViewModel bookViewModel)
+        public IActionResult AddBook (BookViewModel bookViewModel)
         {
+            int id = _bookRepository.AddNewBook( bookViewModel );
+            if( id > 0 )
+            {
+                // IActionResult can return any type of data.
+                //return RedirectToAction( "AddBook" );
+                return RedirectToAction( nameof(AddBook), new {isSuccess = true, bookId = id} );
+            }
             return View();
         }
 
