@@ -1,0 +1,28 @@
+﻿
+DbContext Class
+---------------
+
+-> root level folder for DbContext
+
+-> Create Entity Class eg: Books
+	Add properties
+
+-> DbContext class creation in folder
+
+	public class BookStoreDbContext : DbContext	{
+		public BookStoreDbContext(DbContextOptions <BookStoreDbContext> options) : base(options){
+			
+		}
+
+		public DbSet <Books> Books {get; set;}
+
+
+		/*
+			protected override void OnConfiguring ( DbContextOptionsBuilder optionsBuilder )
+			{
+				base.OnConfiguring( optionsBuilder );
+			}
+
+			This will be removed bcs this config will be added in the program.cs file.
+		*/
+	}

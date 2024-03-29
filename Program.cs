@@ -1,10 +1,16 @@
+using BookStoreWebApp.BookStoreContext;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews(); // dependency injections services
+builder.Services.AddDbContext<AppDbContext>( options =>
+    options.UseSqlServer( "Server=.;Database=BookStore;Integrated Security=True;Encrypt=False;" ) );
+
 
 #if DEBUG
-    builder.Services.AddRazorPages().AddRazorRuntimeCompilation(); // runtime Compilation enabled
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation(); // runtime Compilation enabled
 #endif
 
 var app = builder.Build(); // in app. http pipeline
