@@ -1,0 +1,9 @@
+﻿
+AJAX
+----
+
+Needed libraries
+	jquery.js (have already)
+	jquery.unobtrusive.ajax.js
+
+And we can start using ajax method in the form using data-ajax-		....
