@@ -1,5 +1,7 @@
 ﻿using BookStoreWebApp.BookStoreContext;
 using BookStoreWebApp.ViewModels;
+using Microsoft.EntityFrameworkCore;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace BookStoreWebApp.Repository
 {
@@ -11,7 +13,7 @@ namespace BookStoreWebApp.Repository
             _context = context;
         }
 
-        public int AddNewBook ( BookViewModel book )
+        public async Task<int> AddNewBook ( BookViewModel book )
         {
             var newBook = new Books()
             {
@@ -26,19 +28,57 @@ namespace BookStoreWebApp.Repository
             };
 
             _context.Books.Add( newBook );
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return newBook.Id;
         }
 
-        public List<BookViewModel> GetAllBooks ()
+        public async Task<List<BookViewModel>> GetAllBooks ()
         {
-            return DataSource();
+            var bookModel = new List<BookViewModel>();
+            var books = await _context.Books.ToListAsync();
+            if ( books?.Any() == true )
+            {
+                foreach ( var book in books )
+                {
+                    bookModel.Add( new BookViewModel()
+                    {
+                        Title = book.Title,
+                        Author = book.Author,
+                        Language = book.Language,
+                        Description = book.Description,
+                        TotalPages = book.TotalPages,
+                        Category = book.Category,
+                        CreatedBy = book.CreatedBy,
+                        UpdatedBy = book.UpdatedBy,
+                    } );
+                }
+            }
+
+            return bookModel;
         }
 
-        public BookViewModel GetById ( int id )
+        public async Task<BookViewModel> GetById ( int id )
         {
-            return DataSource().FirstOrDefault( b => b.Id == id );
+            var book = await _context.Books.FindAsync( id );
+            if ( book != null )
+            {
+                var bookModel = new BookViewModel()
+                {
+                    Title = book.Title,
+                    Author = book.Author,
+                    Language = book.Language,
+                    Description = book.Description,
+                    TotalPages = book.TotalPages,
+                    Category = book.Category,
+                    CreatedBy = book.CreatedBy,
+                    UpdatedBy = book.UpdatedBy,
+                };
+
+                return bookModel;
+            }
+
+            return null;
         }
 
         public BookViewModel GetByName ( string author )

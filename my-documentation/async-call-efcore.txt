@@ -1,0 +1,9 @@
+﻿
+ASYNC CALL USING EF CORE FRAMEWORK
+----------------------------------
+
+Making ASYNC call need to following changes:
+	-> use await keyword in SaveCompleteAsync()
+	-> make the method async Task<>
+	-> in controller, do the same
+

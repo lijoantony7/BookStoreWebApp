@@ -13,15 +13,15 @@ namespace BookStoreWebApp.Controllers
             _bookRepository = bookRepository;
         }
 
-        public ViewResult AllBooks ()
+        public async Task<IActionResult> AllBooks ()
         {
-            var result = _bookRepository.GetAllBooks();
+            var result = await _bookRepository.GetAllBooks();
             return View( result );
         }
 
-        public ViewResult BookDetails ( int id )
+        public async Task<IActionResult> BookDetails ( int id )
         {
-            var result = _bookRepository.GetById( id );
+            var result = await _bookRepository.GetById( id );
             return View( result );
         }
 
@@ -33,9 +33,9 @@ namespace BookStoreWebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddBook (BookViewModel bookViewModel)
+        public async Task<IActionResult> AddBook (BookViewModel bookViewModel)
         {
-            int id = _bookRepository.AddNewBook( bookViewModel );
+            int id = await _bookRepository.AddNewBook( bookViewModel );
             if( id > 0 )
             {
                 // IActionResult can return any type of data.
