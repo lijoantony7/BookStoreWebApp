@@ -1,0 +1,45 @@
+﻿
+VIEW COMPONENTS
+---------------
+As per MS officel site,
+Componets are similar to partial view but POWERFUL.
+View componets does not depend on Model binding, and depend on the data provided when calling it.
+
+[using to renser some data(view + data) on a view file without actually being the part of http life cycle]
+
+Renders a chunk: A view component renders a portion of the view rather than a whole response,
+				making it ideal for reusable parts of the interface.
+Separation of concerns: It maintains a clear separation between the UI rendering and business logic,
+						similar to the relationship between a controller and a view.
+Parameters and logic: View components can accept parameters and include business logic,
+					making them dynamic and versatile.
+Usage: They are typically used in layout pages and can be invoked from a view or as a Tag Helper.
+Components: A view component consists of two main parts: the class (usually derived from ViewComponent) 
+			and the result it returns (typically a view).
+
+Where
+-----
+1. Dynamic navigation menu (depends on role)
+2. Get some related data for a page.
+	Related post, related book, etc..
+3. Content visible on side of the page.
+
+HVAE and WHERE TO PUT
+---------------------
+2 Files (C# file and html page)
+C# file can put in a separate folder (general way).
+HTML View can put:
+	/View/{controller}/Components/{View Component Name}/{View Name}
+	/View/Shared/Components/{View Component Name}/{View Name}
+	/Page/Shared/Components/{View Component Name}/{View Name}
+
+
+HOW TO RENDER (USE)
+-------------------
+In View page in where we wanna render this component:
+	@await Component.InvokeAsync("RelatedBooks", new {bookId = 2, isSorted = true})
+
+	OR
+
+	<vc: realted-books book-id=2 is-sorted=true>
+	</vc: related-books>
