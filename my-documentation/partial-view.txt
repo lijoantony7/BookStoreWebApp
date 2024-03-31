@@ -1,0 +1,26 @@
+﻿
+PARTIAL VIEW
+------------
+
+-> Partial view is cshtml view (razor) page within other view page.
+-> Remove duplicate Razor content in page.
+-> Break up large view into small components.
+
+How
+---
+
+<partial name="_partialViewName" />
+
+-> for dynamic partial view, can use: passing object or model in partial view.
+    <partial name="_BookThumbnail" model="book" />
+
+-> accessing in the partial view:
+    <small class="text-muted">@Model.Author</small>
+
+
+Diff type of partial html tags
+------------------------------
+@Html.partial("_partialViewName", Model) -> Best choice: async and simple to use.
+@await Html.partialAsync("_partialViewName", Model)
+@{ Html.RenderPartial("_partialViewName", Model) }
+@{ await Html.RenderPartialAsync("_partialViewName", Model) }
