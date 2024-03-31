@@ -59,6 +59,13 @@
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
         <div>
+            <label asp-for="PDFBook"></label>
+            <div class="mb-3">
+                <input class="form-control" asp-for="PDFBook" type="file" id="customeFile">
+            </div>
+            <span asp-validation-for="PDFBook" class="text-danger"></span>
+        </div>
+        <div>
             <label asp-for="CoverPhoto"></label>
             <div class="mb-3">
                 <input class="form-control" asp-for="CoverPhoto" type="file" id="customeFile">

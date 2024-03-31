@@ -9,6 +9,8 @@
         public string? Category { get; set; }
         public int TotalPages { get; set; }
         public string? Language { get; set; }
+        public string? CoverImageUrl {  get; set; }
+        public string? PDFBookUrl { get; set; }
         public DateTime? CreatedBy { get; set; }
         public DateTime? UpdatedBy { get; set; }
         public List<BookGallery>? BookGalleries { get; set; }

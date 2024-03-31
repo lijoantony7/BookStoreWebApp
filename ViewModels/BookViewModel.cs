@@ -32,7 +32,11 @@ namespace BookStoreWebApp.ViewModels
         [Display(Name = "Upload the cover photo")]
         [Required]
         public IFormFile? CoverPhoto { get; set; }
+        public string? CoverPhotoUrl { get; set; }
 
+        [Display(Name = "Upload your PDF Book.")]
+        public IFormFile? PDFBook { get; set; }
+        public string? PDFBookUrl { get; set; }
         public DateTime? CreatedBy { get; set; }
         public DateTime? UpdatedBy { get; set; }
 

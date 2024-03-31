@@ -24,6 +24,8 @@ namespace BookStoreWebApp.Repository
                 Category = book.Category,
                 CreatedBy = DateTime.UtcNow,
                 UpdatedBy = DateTime.UtcNow,
+                CoverImageUrl = book.CoverPhotoUrl,
+                PDFBookUrl = book.PDFBookUrl,
             };
 
             newBook.BookGalleries = new List<BookGallery>();
@@ -59,6 +61,7 @@ namespace BookStoreWebApp.Repository
                         Description = book.Description,
                         TotalPages = book.TotalPages,
                         Category = book.Category,
+                        CoverPhotoUrl = book.CoverImageUrl,
                         CreatedBy = book.CreatedBy,
                         UpdatedBy = book.UpdatedBy,
                     } );
@@ -80,6 +83,7 @@ namespace BookStoreWebApp.Repository
                     Description = book.Description,
                     TotalPages = book.TotalPages,
                     Category = book.Category,
+                    CoverPhotoUrl = book.CoverImageUrl,
                     CreatedBy = book.CreatedBy,
                     UpdatedBy = book.UpdatedBy,
                     Gallery = book.BookGalleries.Select( g => new GalleryViewModel
@@ -87,8 +91,8 @@ namespace BookStoreWebApp.Repository
                         Id = g.Id,
                         Name = g.Name,
                         URL = g.URL,
-                    } ).ToList()
-
+                    } ).ToList(),
+                    PDFBookUrl = book.PDFBookUrl,
                 } ).FirstOrDefaultAsync();
 
             return result;

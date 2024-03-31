@@ -43,7 +43,13 @@ namespace BookStoreWebApp.Controllers
                 if ( bookViewModel.CoverPhoto != null )
                 {
                     string folder = "images/cover-photos/";
-                    await UploadImages( folder, bookViewModel.CoverPhoto );
+                    bookViewModel.CoverPhotoUrl = await UploadImages ( folder, bookViewModel.CoverPhoto );
+                }
+
+                if ( bookViewModel.PDFBook != null )
+                {
+                    string folder = "books/pdf/";
+                    bookViewModel.PDFBookUrl = await UploadImages ( folder, bookViewModel.PDFBook );
                 }
 
                 if ( bookViewModel.GalleryImages != null )
