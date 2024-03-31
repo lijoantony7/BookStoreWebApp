@@ -7,6 +7,6 @@ namespace BookStoreWebApp.BookStoreContext
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         public DbSet<Books> Books { get; set; }
-
+        public DbSet<BookGallery> BookGalleries { get; set; }
     }
 }

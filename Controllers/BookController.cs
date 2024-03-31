@@ -38,31 +38,56 @@ namespace BookStoreWebApp.Controllers
         public async Task<IActionResult> AddBook ( BookViewModel bookViewModel )
         {
 
-            if ( bookViewModel.CoverPhoto != null )
-            {
-                string folder = "images/cover-photos/";
-                string fileName = Guid.NewGuid().ToString() + "-" + bookViewModel.CoverPhoto.FileName;
-                string serverFolder = Path.Combine( _webHostEnvironment.WebRootPath, folder, fileName );
-
-                // Use a using statement to ensure the FileStream is properly disposed
-                using ( var fileStream = new FileStream( serverFolder, FileMode.Create ) )
-                {
-                    await bookViewModel.CoverPhoto.CopyToAsync( fileStream );
-                }
-            }
-
             if ( ModelState.IsValid )
             {
-                int id = await _bookRepository.AddNewBook( bookViewModel );
-                if ( id > 0 )
+                if ( bookViewModel.CoverPhoto != null )
                 {
-                    // IActionResult can return any type of data.
-                    //return RedirectToAction( "AddBook" );
-                    return RedirectToAction( nameof( AddBook ), new { isSuccess = true, bookId = id } );
+                    string folder = "images/cover-photos/";
+                    await UploadImages( folder, bookViewModel.CoverPhoto );
+                }
+
+                if ( bookViewModel.GalleryImages != null )
+                {
+                    string folder = "images/gallery/";
+                    bookViewModel.Gallery = new List<GalleryViewModel>();
+
+                    foreach ( var file in bookViewModel.GalleryImages )
+                    {
+                        var gallery = new GalleryViewModel()
+                        {
+                            Name = file.FileName,
+                            URL = await UploadImages( folder, file ),
+                        };
+
+                        bookViewModel.Gallery.Add( gallery );
+                    }
+                }
+
+                {
+                    int id = await _bookRepository.AddNewBook( bookViewModel );
+                    if ( id > 0 )
+                    {
+                        // IActionResult can return any type of data.
+                        //return RedirectToAction( "AddBook" );
+                        return RedirectToAction( nameof( AddBook ), new { isSuccess = true, bookId = id } );
+                    }
                 }
             }
 
             return View();
+        }
+
+        private async Task<string> UploadImages ( string folderPath, IFormFile formFile )
+        {
+            folderPath += Guid.NewGuid().ToString() + "-" + formFile.FileName;
+            string serverFolder = Path.Combine( _webHostEnvironment.WebRootPath, folderPath );
+
+            using ( var fileStream = new FileStream( serverFolder, FileMode.Create ) )
+            {
+                await formFile.CopyToAsync( fileStream );
+            }
+
+            return "/" + folderPath;
         }
 
         public BookViewModel BookDetail ( string author )

@@ -66,6 +66,13 @@
             <span asp-validation-for="CoverPhoto" class="text-danger"></span>
         </div>
         <div>
+            <label asp-for="GalleryImages"></label>
+            <div class="mb-3">
+                <input class="form-control" asp-for="GalleryImages" type="file" id="customeFile" multiple>
+            </div>
+            <span asp-validation-for="GalleryImages" class="text-danger"></span>
+        </div>
+        <div>
             <input type="submit" value="Add Book" class="btn btn-primary" />
         </div>
     </form>

@@ -1,0 +1,36 @@
+﻿
+IMAGE UPLOADING
+---------------
+For uploading images via form, in the form we have to add attr
+    1.	enctype="multipart/form-data"
+	    -> This attr do take care of uploading the files to controller level.
+
+    2. datamodel will have the details in it. eg: `bookViewModel.CoverPhoto.FileName` (CoverPhoto is the property)
+    3. need a folder to store the file. `string folder = "images/cover-photos/";`
+    4. to make each file name unique. `Guid.NewGuid().ToString()` in the bennining of the file name.
+    5. Local its fine, but if we use server, there also we need a folder for that:
+        IWebHostEnvironment (configure this environment settings in program.cs)
+        -> create a path using evn folder, folder, and file name. Using Path.Combine()
+    6. To save a copy in our folder use FileStream()
+
+ if ( bookViewModel.CoverPhoto != null )
+{
+    string folder = "images/cover-photos/";
+    string fileName = Guid.NewGuid().ToString() + "-" + bookViewModel.CoverPhoto.FileName;
+    string serverFolder = Path.Combine( _webHostEnvironment.WebRootPath, folder, fileName );
+
+    // Use a using statement to ensure the FileStream is properly disposed
+    using ( var fileStream = new FileStream( serverFolder, FileMode.Create ) )
+    {
+        await bookViewModel.CoverPhoto.CopyToAsync( fileStream );
+    }
+}
+
+
+MULTIPLE FILE UPLOADING
+-----------------------
+1. Need a separate class. One to many relation occures.
+    -> One book can have many images.
+2. Book model need one more property with List of IFormFile to accept multiple files.
+    -> List<IFormFile> GalleryImages {get; set;}
+3. From controller, Galleryfiles will have more than one file so need a for loop to handle each images.

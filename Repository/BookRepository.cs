@@ -1,16 +1,15 @@
 ﻿using BookStoreWebApp.BookStoreContext;
 using BookStoreWebApp.ViewModels;
 using Microsoft.EntityFrameworkCore;
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace BookStoreWebApp.Repository
 {
     public class BookRepository
     {
-        private readonly AppDbContext _context;
-        public BookRepository ( AppDbContext context )
+        private readonly AppDbContext _dbContext;
+        public BookRepository ( AppDbContext dbContext )
         {
-            _context = context;
+            _dbContext = dbContext;
         }
 
         public async Task<int> AddNewBook ( BookViewModel book )
@@ -27,8 +26,18 @@ namespace BookStoreWebApp.Repository
                 UpdatedBy = DateTime.UtcNow,
             };
 
-            _context.Books.Add( newBook );
-            await _context.SaveChangesAsync();
+            newBook.BookGalleries = new List<BookGallery>();
+            foreach ( var file in book.Gallery )
+            {
+                newBook.BookGalleries.Add( new BookGallery()
+                {
+                    Name = file.Name,
+                    URL = file.URL,
+                } );
+            }
+
+            _dbContext.Books.Add( newBook );
+            await _dbContext.SaveChangesAsync();
 
             return newBook.Id;
         }
@@ -36,13 +45,14 @@ namespace BookStoreWebApp.Repository
         public async Task<List<BookViewModel>> GetAllBooks ()
         {
             var bookModel = new List<BookViewModel>();
-            var books = await _context.Books.ToListAsync();
+            var books = await _dbContext.Books.ToListAsync();
             if ( books?.Any() == true )
             {
                 foreach ( var book in books )
                 {
                     bookModel.Add( new BookViewModel()
                     {
+                        Id = book.Id,
                         Title = book.Title,
                         Author = book.Author,
                         Language = book.Language,
@@ -60,10 +70,9 @@ namespace BookStoreWebApp.Repository
 
         public async Task<BookViewModel> GetById ( int id )
         {
-            var book = await _context.Books.FindAsync( id );
-            if ( book != null )
-            {
-                var bookModel = new BookViewModel()
+            var result = await _dbContext.Books
+                .Where( x => x.Id == id )
+                .Select( book => new BookViewModel
                 {
                     Title = book.Title,
                     Author = book.Author,
@@ -73,12 +82,16 @@ namespace BookStoreWebApp.Repository
                     Category = book.Category,
                     CreatedBy = book.CreatedBy,
                     UpdatedBy = book.UpdatedBy,
-                };
+                    Gallery = book.BookGalleries.Select( g => new GalleryViewModel
+                    {
+                        Id = g.Id,
+                        Name = g.Name,
+                        URL = g.URL,
+                    } ).ToList()
 
-                return bookModel;
-            }
+                } ).FirstOrDefaultAsync();
 
-            return null;
+            return result;
         }
 
         public BookViewModel GetByName ( string author )
