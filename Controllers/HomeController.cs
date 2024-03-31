@@ -9,7 +9,7 @@ namespace BookStoreWebApp.Controllers
         public ViewResult Index()
         {
             //ViewData["Title"] = "Welcome Page";
-            Title = "New Home";  // passing title using viewdata attribute
+            Title = "Home";  // passing title using viewdata attribute
             return View();
         }
 

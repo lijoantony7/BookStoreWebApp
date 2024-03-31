@@ -71,6 +71,25 @@ namespace BookStoreWebApp.Repository
             return bookModel;
         }
 
+        public async Task<List<BookViewModel>> GetTopBooksAsync ()
+        {
+            return await _dbContext.Books
+                .Select( book => new BookViewModel()
+                {
+                    Id = book.Id,
+                    Title = book.Title,
+                    Author = book.Author,
+                    Language = book.Language,
+                    Description = book.Description,
+                    TotalPages = book.TotalPages,
+                    Category = book.Category,
+                    CoverPhotoUrl = book.CoverImageUrl,
+                    CreatedBy = book.CreatedBy,
+                    UpdatedBy = book.UpdatedBy,
+
+                } ).Take( 5 ).ToListAsync();
+        }
+
         public async Task<BookViewModel> GetById ( int id )
         {
             var result = await _dbContext.Books
